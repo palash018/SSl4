@@ -36,7 +36,7 @@ export default function Signup({ navigation }) {
     }
 
     async function sign(){
-     axios.post('http://192.168.29.121:3000/createUser', {
+     axios.post('http://192.168.50.78:3000/createUser', {
             username:username,
             password:password,
             email:email

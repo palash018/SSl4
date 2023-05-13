@@ -22,7 +22,7 @@ export default function Create  ({setModalVisible,location,getLocation,getRoom})
  async function create(){
     setLoader(true);
     const token =await AsyncStorage.getItem('token');
-    await axios.post('http://192.168.29.121:3000/createRoom', {
+    await axios.post('http://192.168.50.78:3000/createRoom', {
        room_name:room_name,
        lat:lat,
        long:long,

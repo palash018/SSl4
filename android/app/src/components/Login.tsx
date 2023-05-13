@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
     }
     async function process() {
     console.log('function ran');
-   axios.post('http://192.168.29.121:3000/login', {
+   axios.post('http://192.168.50.78:3000/login', {
        username:username,
        password:password
      })

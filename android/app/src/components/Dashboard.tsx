@@ -99,7 +99,7 @@ export default function Dashboard({ navigation }) {
         const d = getDistanceFromLatLonInKm(newLat, newLong, obj.lat, obj.long);
 
         if (d <= obj.circle && !obj.previous) {
-          await axios.post('http://192.168.29.121:3000/updateEvent', { event: 'came', room_id: obj.room_id }, {
+          await axios.post('http://192.168.50.78:3000/updateEvent', { event: 'came', room_id: obj.room_id }, {
             headers: {
               authorization: "Bearer " + token
             }
@@ -128,7 +128,7 @@ export default function Dashboard({ navigation }) {
 
         }
         else if (d > obj.circle && obj.previous) {
-          await axios.post('http://192.168.29.121:3000/updateEvent', { event: 'left', room_id: obj.room_id }, {
+          await axios.post('http://192.168.50.78:3000/updateEvent', { event: 'left', room_id: obj.room_id }, {
             headers: {
               authorization: "Bearer " + token
             }
@@ -168,7 +168,7 @@ export default function Dashboard({ navigation }) {
   }
   const handleAddRoom = async () => {
     const token = await AsyncStorage.getItem('token');
-    await axios.post('http://192.168.29.121:3000/joinRoom', { room_id: newRoomName }, {
+    await axios.post('http://192.168.50.78:3000/joinRoom', { room_id: newRoomName }, {
       headers: {
         authorization: "Bearer " + token
       }
@@ -198,7 +198,7 @@ export default function Dashboard({ navigation }) {
     const arr = JSON.parse(arrayString);
 
     const token = await AsyncStorage.getItem('token');
-    axios.get('http://192.168.29.121:3000/roomlist', {
+    axios.get('http://192.168.50.78:3000/roomlist', {
       headers: {
         authorization: "Bearer " + token
       }
@@ -240,7 +240,7 @@ export default function Dashboard({ navigation }) {
 
 
     const token = await AsyncStorage.getItem('token');
-    axios.get('http://192.168.29.121:3000/roomdata', {
+    axios.get('http://192.168.50.78:3000/roomdata', {
       params: {
         room_id: room_id
       },
@@ -312,8 +312,10 @@ export default function Dashboard({ navigation }) {
 
   };
 
-  function clear() {
-    AsyncStorage.removeItem('token').then(navigation.navigate('Login'));
+  async function clear() {
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('member');
+    navigation.navigate('Login')
   }
 
 
